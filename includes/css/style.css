@@ -1,0 +1,10 @@
+.glpdata-error {
+	color: #ff0000;
+}
+
+.glp-data {
+	background-color: transparent;
+	border: 0px none transparent;
+	padding: 0px;
+	overflow: hidden;
+}
