@@ -2,10 +2,12 @@
 
 class GLPVisualizer {
 	
-	protected static $shinyserver;
+	protected $shinyserver;
+	protected $downloadable;
 	
 	public function __construct() {
-		$this->shinyserver = 'https://greaterlou.shinyapps.io/'; //TODO
+		$this->shinyserver = 'https://greaterlou.shinyapps.io/';
+		$this->downloadable = get_site_url().'/uofl-plugin-testing-form/'; // TODO
 		$this->loadScripts();
 		$this->bindShortcodes();
 	}
@@ -25,6 +27,7 @@ class GLPVisualizer {
 				'width' => '100%',
 				'height' => '500',
 				'scrolling' => 'no',
+				'data' => '',
 				'class' => 'glp-data',
 				'frameborder' => '0',
 			];
@@ -46,6 +49,9 @@ class GLPVisualizer {
 				}
 			}
 			$html .= '></iframe>'."\n";
+			
+			$this->downloadable .= $atts['data'] == '' ? '' : '?glp-downloadable=https://github.com/greaterlouisvilleproject/glp-downloadable/raw/main/'.$atts['data'];
+			$html .= '<div class="button__container"><a class="button" href="'.$this->downloadable.'" target="_blank" rel="noopener">Download Data</a></div>';
 			
 			if(!$has_scr) {
 				$html = '<p class="glpdata-error">Visualizer Error:<br>The <code>src</code> attribute must be set for GLP elements.</p>';
